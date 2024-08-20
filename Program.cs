@@ -16,7 +16,7 @@ int[] gregorScores = new int[] { 91, 91, 91, 91, 91, 91, 91 };
 string[] studentNames = new string[] { "Sophia", "Andrew", "Emma", "Logan", "Becky", "Chris", "Eric", "Gregor" };
 int[] studentScores = new int[10];
 
-Console.WriteLine("Student\t\tGrade\n");
+Console.WriteLine("Student\t\tExam Score\t\tOverall\tGrade\tExtra Credit\n");
 
 foreach (string currentStudent in studentNames)
 {
@@ -39,7 +39,10 @@ foreach (string currentStudent in studentNames)
     else
         continue;
 
-    int sumAssignmentScores = 0;
+    decimal averageExamScore = 0;
+    decimal averageExtraCredit = 0;
+    decimal sumExamScores = 0;
+    decimal sumExtraCredit = 0;
     decimal currentStudentGrade = 0;
 
     int gradedAssignments = 0;
@@ -48,11 +51,15 @@ foreach (string currentStudent in studentNames)
         gradedAssignments++;
 
         if (gradedAssignments <= examAssignments)
-            sumAssignmentScores += score;
+            sumExamScores += score;
         else
-            sumAssignmentScores += score / 10;
+            sumExtraCredit += (decimal)score / 10;
     }
 
+    decimal sumAssignmentScores = sumExamScores + sumExtraCredit;
+
+    averageExamScore = (decimal)sumExamScores / examAssignments;
+    averageExtraCredit = (decimal)sumExtraCredit / examAssignments;
     currentStudentGrade = (decimal)sumAssignmentScores / examAssignments;
 
     string currentStudentLetterGrade = "";
@@ -96,7 +103,7 @@ foreach (string currentStudent in studentNames)
     else
         currentStudentLetterGrade = "F";
 
-    Console.WriteLine($"{currentStudent}\t\t{currentStudentGrade}\t{currentStudentLetterGrade}");
+    Console.WriteLine($"{currentStudent}\t\t{averageExamScore}\t\t\t{currentStudentGrade}\t{currentStudentLetterGrade}\t{Math.Floor(averageExamScore)} ({averageExtraCredit} pts)");
 }
 
 Console.WriteLine("Press the Enter key to continue");
