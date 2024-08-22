@@ -1,24 +1,27 @@
-﻿// string value1 = " a";
-// string value2 = "A ";
+﻿string permission = "Admin|Manager";
+int level = 56;
 
-// Console.WriteLine(value1.Trim().ToLower() == value2.Trim().ToLower());
+string message;
 
-// Console.WriteLine("a" != "a");
-// Console.WriteLine("a" != "A");
-// Console.WriteLine(1 != 2);
+if (permission.Contains("Admin") && level > 55)
+{
+    message = "Welcome, Super Admin user.";
+}
+else if (permission.Contains("Admin") && level <= 55)
+{
+    message = "Welcome, Admin user.";
+}
+else if (permission.Contains("Manager") && level >= 20)
+{
+    message = "Contact an Admin for access.";
+}
+else if (permission.Contains("Manager") && level < 20)
+{
+    message = "You do not have sufficient privileges.";
+}
+else
+{
+    message = "You do not have sufficient privileges.";
+}
 
-// string myValue = "a";
-// Console.WriteLine(myValue != "a");
-
-// Console.WriteLine(1 > 2);
-// Console.WriteLine(1 < 2);
-// Console.WriteLine(1 >= 1);
-// Console.WriteLine(1 <= 1);
-
-// string pangram = "The quick brown fox jumps over the lazy dog.";
-// Console.WriteLine(pangram.Contains("fox"));
-// Console.WriteLine(pangram.Contains("cow"));
-
-string pangram = "The quick brown fox jumps over the lazy dog.";
-Console.WriteLine(!pangram.Contains("fox"));
-Console.WriteLine(!pangram.Contains("cow"));
+Console.WriteLine(message);
