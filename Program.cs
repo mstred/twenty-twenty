@@ -219,15 +219,46 @@ do
             break;
         case "3":
             // Ensure animal ages and physical descriptions are complete
-            Console.WriteLine("Challenge Project - please check back soon to see progress.");
-            Console.WriteLine("Press the Enter key to continue.");
-            readResult = Console.ReadLine();
+            for (int petIndex = 0; petIndex < maxPets; petIndex++)
+            {
+                var petId = ourAnimals[petIndex, 0];
+                if (petId != "ID #: ")
+                {
+                    while (!int.TryParse(ourAnimals[petIndex, 2].Replace("Age: ", ""), out _))
+                    {
+                        Console.WriteLine($"Enter an age for ID #: {petId}");
+                        ourAnimals[petIndex, 2] = $"Age: {Console.ReadLine() ?? ""}";
+                    }
+                    while (ourAnimals[petIndex, 4].Replace("Physical description: ", "") == "")
+                    {
+                        Console.WriteLine($"Enter a physical description for ID #: {petId} (size, color, breed, gender, weight, housebroken)");
+                        ourAnimals[petIndex, 4] = $"Physical description: {Console.ReadLine() ?? ""}";
+                    }
+                }
+            }
             break;
         case "4":
             // Ensure animal nicknames and personality descriptions are complete
-            Console.WriteLine("Challenge Project - please check back soon to see progress.");
-            Console.WriteLine("Press the Enter key to continue.");
-            readResult = Console.ReadLine();
+            // Console.WriteLine("Challenge Project - please check back soon to see progress.");
+            // Console.WriteLine("Press the Enter key to continue.");
+            // readResult = Console.ReadLine();
+            for (int petIndex = 0; petIndex < maxPets; petIndex++)
+            {
+                var petId = ourAnimals[petIndex, 0];
+                if (petId != "ID #: ")
+                {
+                    while (ourAnimals[petIndex, 3].Replace("Nickname: ", "") == "")
+                    {
+                        Console.WriteLine($"Enter a nickname for ID #: {petId}");
+                        ourAnimals[petIndex, 3] = $"Nickname: {Console.ReadLine() ?? ""}";
+                    }
+                    while (ourAnimals[petIndex, 5].Replace("Personality: ", "") == "")
+                    {
+                        Console.WriteLine($"Enter a personality description for ID #: {petId} (likes or dislikes, tricks, energy level)");
+                        ourAnimals[petIndex, 5] = $"Personality: {Console.ReadLine() ?? ""}";
+                    }
+                }
+            }
             break;
         case "5":
             // Edit an animal’s age
