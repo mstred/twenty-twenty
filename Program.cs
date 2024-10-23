@@ -42,12 +42,34 @@
 // int value2 = Convert.ToInt32(1.5m);
 // Console.WriteLine(value2);
 
-string value1 = "bad";
-int result;
-if (int.TryParse(value1, out result))
-    Console.WriteLine($"Measurement: {result}");
-else
-    Console.WriteLine("Unable to report the measurement.");
+// string value1 = "bad";
+// int result;
+// if (int.TryParse(value1, out result))
+//     Console.WriteLine($"Measurement: {result}");
+// else
+//     Console.WriteLine("Unable to report the measurement.");
 
-if (result > 0)
-    Console.WriteLine($"Measurement (w/ offset): {50 + result}");
+// if (result > 0)
+//     Console.WriteLine($"Measurement (w/ offset): {50 + result}");
+
+using System.Globalization;
+
+CultureInfo.CurrentCulture = new CultureInfo("en-US");
+
+string[] values = { "12.3", "45", "ABC", "11", "DEF" };
+
+string message = "";
+decimal total = 0;
+
+foreach (string value in values)
+{
+    bool isValidNumber = decimal.TryParse(value, out decimal numericValue);
+
+    if (isValidNumber)
+        total += numericValue;
+    else
+        message += value;
+}
+
+Console.WriteLine($"Message: {message}");
+Console.WriteLine($"Total: {total}");
