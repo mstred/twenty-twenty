@@ -1,7 +1,32 @@
-﻿string orderStream = "B123,C234,A345,C15,B177,G3003,C235,B179";
-string[] orders = orderStream.Split(",");
+﻿// string first = "Hello";
+// string second = "World";
 
-Array.Sort(orders);
+// // string result = string.Format("{0} {1}!", first, second);
+// // Console.WriteLine(result);
 
-foreach (var order in orders)
-    Console.WriteLine(order.Length != 4 ? $"{order}\t- Error" : order);
+// // Console.WriteLine("{1} {0}!", first, second);
+// // Console.WriteLine("{0} {0} {0}!", first, second);
+
+// Console.WriteLine($"{first} {second}!");
+// Console.WriteLine($"{second} {first}!");
+// Console.WriteLine($"{first} {first} {first}!");
+
+// decimal price = 123.45m;
+// int discount = 50;
+
+// Console.WriteLine($"Price: {price:C} (Save {discount:C})");
+
+// decimal measurement = 123456.78912m;
+// Console.WriteLine($"Measurement: {measurement:N} units");
+// Console.WriteLine($"Measurement: {measurement:N4} units");
+
+// decimal tax = .36785m;
+// Console.WriteLine($"Tax rate: {tax:P}");
+// Console.WriteLine($"Tax rate: {tax:P1}");
+
+decimal price = 67.55m;
+decimal salePrice = 59.99m;
+
+string yourDiscount = string.Format("You saved {0:C2} off the regular {1:C2} price. ", (price - salePrice), price);
+yourDiscount += $"A discount of {(price - salePrice)/price:P2}!";
+Console.WriteLine(yourDiscount);
