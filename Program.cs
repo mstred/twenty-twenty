@@ -1,18 +1,31 @@
-﻿// string input = "Pad this";
+﻿string customerName = "Ms. Barros";
 
-// // Console.WriteLine(input.PadLeft(12));
-// // Console.WriteLine($"{input.PadRight(12)}.");
+string currentProduct = "Magic Yield";
+int currentShares = 2975000;
+decimal currentReturn = 0.1275m;
+decimal currentProfit = 55000000.0m;
 
-// Console.WriteLine(input.PadLeft(12, '-'));
-// Console.WriteLine(input.PadRight(12, '-'));
+string newProduct = "Glorious Future";
+decimal newReturn = 0.13125m;
+decimal newProfit = 63000000.0m;
 
-string paymentId = "769C";
-string payeeName = "Mr. Stephen Ortega";
-string paymentAmount = "$5,000.00";
+string topMessage = @$"Dear {customerName},
+As a customer of our {currentProduct} offering we are excited to tell you about a new financial product that would dramatically increase your return.
 
-var formattedLine = paymentId.PadRight(6);
-formattedLine += payeeName.PadRight(24);
-formattedLine += paymentAmount.PadLeft(10);
+Currently, you own {currentShares:N} shares at a return of {currentReturn:P}.
 
-Console.WriteLine("1234567890123456789012345678901234567890");
-Console.WriteLine(formattedLine);
+Our new product, {newProduct} offers a return of {newReturn:P}.  Given your current volume, your potential profit would be {newProfit:C}.
+";
+
+Console.WriteLine(topMessage);
+Console.WriteLine("Here's a quick comparison:\n");
+
+string comparisonMessage = "";
+comparisonMessage += $"{currentProduct.PadRight(20)}";
+comparisonMessage += $"{string.Format("{0:P}", currentReturn).PadRight(10)}";
+comparisonMessage += $"{string.Format("{0:C}", currentProfit).PadRight(10)}\n";
+comparisonMessage += $"{newProduct.PadRight(20)}";
+comparisonMessage += $"{string.Format("{0:P}", newReturn).PadRight(10)}";
+comparisonMessage += $"{string.Format("{0:C}", newProfit).PadRight(10)}\n";
+
+Console.WriteLine(comparisonMessage);
