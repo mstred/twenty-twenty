@@ -1,31 +1,26 @@
-﻿string customerName = "Ms. Barros";
+﻿// string message = "Find what is (inside the parentheses)";
 
-string currentProduct = "Magic Yield";
-int currentShares = 2975000;
-decimal currentReturn = 0.1275m;
-decimal currentProfit = 55000000.0m;
+// int openingPosition = message.IndexOf("(") + 1;
+// int closingPosition = message.IndexOf(")");
 
-string newProduct = "Glorious Future";
-decimal newReturn = 0.13125m;
-decimal newProfit = 63000000.0m;
+// // Console.WriteLine(openingPosition);
+// // Console.WriteLine(closingPosition);
 
-string topMessage = @$"Dear {customerName},
-As a customer of our {currentProduct} offering we are excited to tell you about a new financial product that would dramatically increase your return.
+// Console.WriteLine(message.Substring(openingPosition, closingPosition - openingPosition));
 
-Currently, you own {currentShares:N} shares at a return of {currentReturn:P}.
+// string message = "What is the value <span>between the tags</span>?";
 
-Our new product, {newProduct} offers a return of {newReturn:P}.  Given your current volume, your potential profit would be {newProfit:C}.
-";
+// int openingPosition = message.IndexOf("<span>") + 6;
+// int closingPosition = message.IndexOf("</span>");
 
-Console.WriteLine(topMessage);
-Console.WriteLine("Here's a quick comparison:\n");
+// Console.WriteLine(message.Substring(openingPosition, closingPosition - openingPosition));
 
-string comparisonMessage = "";
-comparisonMessage += $"{currentProduct.PadRight(20)}";
-comparisonMessage += $"{string.Format("{0:P}", currentReturn).PadRight(10)}";
-comparisonMessage += $"{string.Format("{0:C}", currentProfit).PadRight(10)}\n";
-comparisonMessage += $"{newProduct.PadRight(20)}";
-comparisonMessage += $"{string.Format("{0:P}", newReturn).PadRight(10)}";
-comparisonMessage += $"{string.Format("{0:C}", newProfit).PadRight(10)}\n";
+string message = "What is the value <span>between the tags</span>?";
 
-Console.WriteLine(comparisonMessage);
+const string openSpan = "<span>";
+const string closeSpan = "</span>";
+
+int openingPosition = message.IndexOf(openSpan) + openSpan.Length;
+int closingPosition = message.IndexOf(closeSpan);
+
+Console.WriteLine(message.Substring(openingPosition, closingPosition - openingPosition));
