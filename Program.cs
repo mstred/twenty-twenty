@@ -1,26 +1,77 @@
-﻿// string message = "Find what is (inside the parentheses)";
+﻿// string message = "hello there!";
 
-// int openingPosition = message.IndexOf("(") + 1;
-// int closingPosition = message.IndexOf(")");
+// int first_h = message.IndexOf('h');
+// int last_h = message.LastIndexOf('h');
 
-// // Console.WriteLine(openingPosition);
-// // Console.WriteLine(closingPosition);
+// Console.WriteLine($"For the message '{message}', the first 'h' is at position {first_h} and the last 'h' is at position {last_h}");
 
-// Console.WriteLine(message.Substring(openingPosition, closingPosition - openingPosition));
+// string message = "(What if) I am (only interested) in the last (set of parentheses)?";
 
-// string message = "What is the value <span>between the tags</span>?";
-
-// int openingPosition = message.IndexOf("<span>") + 6;
-// int closingPosition = message.IndexOf("</span>");
+// int openingPosition = message.LastIndexOf('(') + 1;
+// int closingPosition = message.LastIndexOf(')');
 
 // Console.WriteLine(message.Substring(openingPosition, closingPosition - openingPosition));
 
-string message = "What is the value <span>between the tags</span>?";
+// string message = "(What if) there are (more than) one (set of parentheses)?";
 
-const string openSpan = "<span>";
-const string closeSpan = "</span>";
+// while (true)
+// {
+//     int openingPosition = message.IndexOf('(') + 1;
+//     int closingPosition = message.IndexOf(')');
 
-int openingPosition = message.IndexOf(openSpan) + openSpan.Length;
-int closingPosition = message.IndexOf(closeSpan);
+//     if (int.IsNegative(openingPosition) || int.IsNegative(closingPosition))
+//         break;
 
-Console.WriteLine(message.Substring(openingPosition, closingPosition - openingPosition));
+//     Console.WriteLine(message.Substring(openingPosition, closingPosition - openingPosition));
+
+//     message = message.Substring(closingPosition + 1);
+// }
+
+// string message = "Help (find) the {opening symbols}";
+// Console.WriteLine($"Searching THIS Message: {message}");
+// char[] openSymbols = ['[', '{', '('];
+// int startPosition = 5;
+// int openingPosition = message.IndexOfAny(openSymbols);
+// Console.WriteLine($"Found WITHOUT using startPosition: {message.Substring(openingPosition)}");
+
+// openingPosition = message.IndexOfAny(openSymbols, startPosition);
+// Console.WriteLine($"Found WITH using startPosition {startPosition}:  {message.Substring(openingPosition)}");
+
+string message = "(What if) I have [different symbols] but every {open symbol} needs a [matching closing symbol]?";
+
+char[] openSymbols = ['[', '{', '('];
+
+int closingPosition = default;
+
+while (true)
+{
+    int openingPosition = message.IndexOfAny(openSymbols, closingPosition);
+
+    if (int.IsNegative(openingPosition))
+        break;
+
+    string currentSymbol = message.Substring(openingPosition, 1);
+
+    char matchingSymbol = default;
+
+    switch (currentSymbol)
+    {
+        case "[":
+            matchingSymbol = ']';
+            break;
+        case "{":
+            matchingSymbol = '}';
+            break;
+        case "(":
+            matchingSymbol = ')';
+            break;
+    }
+
+    openingPosition += 1;
+    closingPosition = message.IndexOf(matchingSymbol, openingPosition);
+
+    if (int.IsNegative(closingPosition))
+        break;
+
+    Console.WriteLine(message.Substring(openingPosition, closingPosition - openingPosition));
+}
