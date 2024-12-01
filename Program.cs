@@ -1,18 +1,21 @@
-﻿int[] array = [1, 2, 3, 4, 5];
+﻿string status = "Healthy";
 
-PrintArray(array);
-Clear(array);
-PrintArray(array);
+// Console.WriteLine($"Start: {status}");
+// SetHealth(status, false);
+// Console.WriteLine($"End: {status}");
 
-void PrintArray(int[] array)
+// void SetHealth(string status, bool isHealthy)
+// {
+//     status = isHealthy ? "Healthy" : "Unhealthy";
+//     Console.WriteLine($"Middle: {status}");
+// }
+
+Console.WriteLine($"Start: {status}");
+SetHealth(false);
+Console.WriteLine($"End: {status}");
+
+void SetHealth(bool isHealthy)
 {
-    foreach (var a in array)
-        Console.Write($"{a} ");
-    Console.WriteLine();        
-}
-
-void Clear(int[] array)
-{
-    for (int i = 0; i < array.Length; i++)
-        array[i] = 0;
+    status = isHealthy ? "Healthy" : "Unhealthy";
+    Console.WriteLine($"Middle: {status}");
 }
