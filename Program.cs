@@ -1,12 +1,22 @@
-﻿string[] students = ["Jenna", "Ayesha", "Carlos", "Viktor"];
+﻿double pi = 3.14159;
+PrintCircleInfo(12);
+PrintCircleInfo(24);
 
-DisplayStudents(students);
-DisplayStudents(["Robert", "Vanya"]);
-
-void DisplayStudents(string[] students)
+void PrintCircleInfo(int radius)
 {
-    foreach (var student in students)
-        Console.Write($"{student}, ");
+    Console.WriteLine($"Circle with radius {radius}");
+    PrintCircleArea(radius);
+    PrintCircleCircunference(radius);
+}
 
-    Console.WriteLine();
+void PrintCircleArea(int radius)
+{
+    double area = pi * (radius * radius);
+    Console.WriteLine($"Area = {area}");
+}
+
+void PrintCircleCircunference(int radius)
+{
+    double circunference = 2 * pi * radius;
+    Console.WriteLine($"Circunference = {circunference}");
 }
