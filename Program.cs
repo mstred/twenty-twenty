@@ -1,23 +1,12 @@
-﻿int[] schedule = [800, 1200, 1600, 2000];
+﻿string[] students = ["Jenna", "Ayesha", "Carlos", "Viktor"];
 
-void DisplayAdjustedTimes(int[] times, int currentGMT, int newGMT)
+DisplayStudents(students);
+DisplayStudents(["Robert", "Vanya"]);
+
+void DisplayStudents(string[] students)
 {
-    int diff = 0;
-    int currentGMTAbs = Math.Abs(currentGMT);
-    int newGMTAbs = Math.Abs(newGMT);
+    foreach (var student in students)
+        Console.Write($"{student}, ");
 
-    if (currentGMTAbs > 12 || newGMTAbs > 12)
-        Console.WriteLine("Invalid GMT");
-    else if ((currentGMT <= 0 && newGMT <= 0) || (currentGMT >= 0 && newGMT >= 0))
-        diff = 100 * (currentGMTAbs - newGMTAbs);
-    else
-        diff = 100 * (currentGMTAbs + newGMTAbs);
-
-    foreach (var time in times)
-    {
-        int newTime = (time + diff) % 2400;
-        Console.WriteLine($"{time} -> {newTime}");
-    }
+    Console.WriteLine();
 }
-
-DisplayAdjustedTimes(schedule, 6, -6);
