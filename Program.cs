@@ -1,49 +1,31 @@
-﻿string[] guestList = ["Rebecca", "Nadia", "Noor", "Jonte"];
-string[] rsvps = new string[10];
-int count = 0;
-
-RSVP("Rebecca");
-RSVP("Nadia", 2, "Nuts");
-RSVP(name: "Linh", partySize: 2, inviteOnly: false);
-RSVP("Tony", allergies: "Jackfruit", inviteOnly: true);
-RSVP("Noor", 4, inviteOnly: false);
-RSVP("Jonte", 2, "Stone fruit", false);
-ShowRSVPs();
-
-void RSVP(string name, int partySize = 1, string allergies = "none", bool inviteOnly = true)
+﻿string[,] corporate = 
 {
-    if (inviteOnly)
-    {
-        // search guestList before adding rsvp
-        bool found = false;
+    {"Robert", "Bavin"}, {"Simon", "Bright"},
+    {"Kim", "Sinclair"}, {"Aashrita", "Kamath"},
+    {"Sarah", "Delucchi"}, {"Sinan", "Ali"}
+};
 
-        foreach (var guest in guestList)
-        {
-            if (guest.Equals(name))
-            {
-                found = true;
-                break;
-            }
-        }
+string[,] external = 
+{
+    {"Vinnie", "Ashton"}, {"Cody", "Dysart"},
+    {"Shay", "Lawrence"}, {"Daren", "Valdes"}
+};
 
-        if (!found)
-        {
-            Console.WriteLine($"Sorry, {name} is not on the guest list");
-            return;
-        }
-    }
+string externalDomain = "hayworth.com";
 
-    rsvps[count] = $"Name: {name}, \tParty Size: {partySize}, \tAllergies: {allergies}";
-    count++;
+for (int i = 0; i < corporate.GetLength(0); i++) 
+{
+    // display internal email addresses
+    DisplayEmailAddress(firstName: corporate[i, 0], lastName: corporate[i, 1]);
 }
 
-void ShowRSVPs()
+for (int i = 0; i < external.GetLength(0); i++) 
 {
-    Console.WriteLine("\nTotal RSVPs:");
+    // display external email addresses
+    DisplayEmailAddress(firstName: external[i, 0], lastName: external[i, 1], domain: externalDomain);
+}
 
-    foreach (var rsvp in rsvps)
-    {
-        if (!string.IsNullOrEmpty(rsvp))
-            Console.WriteLine(rsvp);
-    }
+void DisplayEmailAddress(string firstName, string lastName, string domain = "contoso.com")
+{
+    Console.WriteLine($"{firstName.ToLower()[..2]}{lastName.ToLower()}@{domain}");
 }
