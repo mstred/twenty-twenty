@@ -1,22 +1,12 @@
-﻿double pi = 3.14159;
-PrintCircleInfo(12);
-PrintCircleInfo(24);
+﻿int a = 3;
+int b = 4;
+int c = 0;
 
-void PrintCircleInfo(int radius)
-{
-    Console.WriteLine($"Circle with radius {radius}");
-    PrintCircleArea(radius);
-    PrintCircleCircunference(radius);
-}
+Multiply(a, b, c);
+Console.WriteLine($"global statement: {a} x {b} = {c}");
 
-void PrintCircleArea(int radius)
+void Multiply(int a, int b, int c)
 {
-    double area = pi * (radius * radius);
-    Console.WriteLine($"Area = {area}");
-}
-
-void PrintCircleCircunference(int radius)
-{
-    double circunference = 2 * pi * radius;
-    Console.WriteLine($"Circunference = {circunference}");
+    c = a * b;
+    Console.WriteLine($"inside Multiply method: {a} x {b} = {c}");
 }
