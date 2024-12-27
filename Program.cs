@@ -1,38 +1,25 @@
-﻿int[,] TwoCoins(int[] coins, int target)
+﻿Random random = new Random();
+
+Console.WriteLine("Would you like to play? (Y/N)");
+if (ShouldPlay()) 
 {
-    int[,] result = {{-1, -1}, {-1, -1}, {-1, -1}, {-1, -1}, {-1, -1}};
-    int count = 0;
-
-    for (int current = 0; current < coins.Length; current++)
-        for (int next = current + 1; next < coins.Length; next++)
-        {
-            if (coins[current] + coins[next] == target)
-            {
-                result[count, 0] = current;
-                result[count, 1] = next;
-                count++;
-            }
-            if (count == result.GetLength(0))
-                return result;
-        }
-
-    return (count == 0) ? new int[0, 0] : result;
+    PlayGame();
 }
 
-int target = 80;
-int[] coins = [5, 5, 50, 25, 25, 10, 5];
-int[,] result = TwoCoins(coins, target);
-int resultLength = result.GetLength(0);
+void PlayGame() 
+{
+    var play = true;
 
-if (resultLength == 0)
-    Console.WriteLine("No two coins make change");
-else
-    Console.WriteLine("Change found at positions:");
-    for (int i = 0; i < resultLength; i++)
+    while (play) 
     {
-        int first = result[i, 0];
-        int second = result[i, 1];
-        if (first == -1 && second == -1)
-            break;
-        Console.WriteLine($"{first}, {second}");
+        var target;
+        var roll;
+
+        Console.WriteLine($"Roll a number greater than {target} to win!");
+        Console.WriteLine($"You rolled a {roll}");
+        Console.WriteLine(WinOrLose());
+        Console.WriteLine("\nPlay again? (Y/N)");
+
+        play = ShouldPlay();
     }
+}
