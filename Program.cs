@@ -6,18 +6,16 @@ By default, the students are divided into 6 groups. However, there are some clas
 The design specification for the Contoso Petting Zoo application is as follows:
 
 - There will be three visiting schools
-    - School A has six visiting groups (the default number)
-    - School B has three visiting groups
-    - School C has two visiting groups
+    - School A has six visiting groups (the default number) ✅
+    - School B has three visiting groups ✅
+    - School C has two visiting groups ✅
 
 - For each visiting school, perform the following tasks
     - Randomize the animals ✅
     - Assign the animals to the correct number of groups ✅
-    - Print the school name
-    - Print the animal groups
+    - Print the school name ✅
+    - Print the animal groups ✅
 */
-
-using System;
 
 string[] pettingZoo = 
 [
@@ -26,10 +24,19 @@ string[] pettingZoo =
     "ostriches", "pigs", "ponies", "rabbits", "sheep", "tortoises",
 ];
 
-RandomizeAnimals();
-string[,] group = AssignGroup();
-Console.WriteLine("School A");
-// PrintGroup(group);
+Console.Clear();
+PlanSchoolVisit("School A");
+PlanSchoolVisit("School B", 3);
+PlanSchoolVisit("School C", 2);
+
+void PlanSchoolVisit(string schoolName, int groups = 6)
+{
+    RandomizeAnimals();
+    string[,] group = AssignGroup(groups);
+    Console.WriteLine(schoolName);
+    PrintGroup(group);
+    Console.WriteLine();
+}
 
 void RandomizeAnimals()
 {
@@ -39,10 +46,7 @@ void RandomizeAnimals()
     for (int i = 0; i < pettingZooLength; i++)
     {
         int r = random.Next(i, pettingZooLength);
-
-        string temp = pettingZoo[i];
-        pettingZoo[i] = pettingZoo[r];
-        pettingZoo[r] = temp;
+        (pettingZoo[r], pettingZoo[i]) = (pettingZoo[i], pettingZoo[r]);
     }
 }
 
@@ -56,4 +60,17 @@ string[,] AssignGroup(int groups = 6)
             result[i, j] = pettingZoo[start++];
 
     return result;
+}
+
+void PrintGroup(string[,] group)
+{
+    for (int i = 0; i < group.GetLength(0); i++)
+    {
+        Console.Write($"Group {i + 1}: ");
+
+        for (int j = 0; j < group.GetLength(1); j++)
+            Console.Write($"{group[i, j]} ");
+
+        Console.WriteLine();
+    }
 }
