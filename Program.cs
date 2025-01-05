@@ -11,7 +11,7 @@ The design specification for the Contoso Petting Zoo application is as follows:
     - School C has two visiting groups
 
 - For each visiting school, perform the following tasks
-    - Randomize the animals
+    - Randomize the animals ✅
     - Assign the animals to the correct number of groups
     - Print the school name
     - Print the animal groups
@@ -20,13 +20,28 @@ The design specification for the Contoso Petting Zoo application is as follows:
 using System;
 
 string[] pettingZoo = 
-{
+[
     "alpacas", "capybaras", "chickens", "ducks", "emus", "geese", 
     "goats", "iguanas", "kangaroos", "lemurs", "llamas", "macaws", 
     "ostriches", "pigs", "ponies", "rabbits", "sheep", "tortoises",
-};
+];
 
-// RandomizeAnimals();
+RandomizeAnimals();
 // string[,] group = AssignGroup();
 Console.WriteLine("School A");
 // PrintGroup(group);
+
+void RandomizeAnimals()
+{
+    Random random = new();
+    var pettingZooLength = pettingZoo.Length;
+
+    for (int i = 0; i < pettingZooLength; i++)
+    {
+        int r = random.Next(i, pettingZooLength);
+
+        string temp = pettingZoo[i];
+        pettingZoo[i] = pettingZoo[r];
+        pettingZoo[r] = temp;
+    }
+}
