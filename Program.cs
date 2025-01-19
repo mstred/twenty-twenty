@@ -5,6 +5,7 @@ Console.CursorVisible = false;
 int height = Console.WindowHeight - 1;
 int width = Console.WindowWidth - 5;
 bool shouldExit = false;
+bool detectNondirectionalChar;
 
 // Console position of the player
 int playerX = 0;
@@ -27,7 +28,13 @@ int food = 0;
 InitializeGame();
 while (!shouldExit) 
 {
-    Move();
+    if (TerminalResized())
+    {
+        Console.Clear();
+        Console.WriteLine("Console was resized. Program exiting.");
+        break;
+    }
+    Move(detectNondirectionalChar);
 }
 
 // Returns true if the Terminal was resized 
@@ -67,7 +74,7 @@ void FreezePlayer()
 }
 
 // Reads directional input from the Console and moves the player
-void Move() 
+void Move(bool detectNondirectionalChar = false) 
 {
     int lastX = playerX;
     int lastY = playerY;
@@ -89,6 +96,9 @@ void Move()
 		case ConsoleKey.Escape:     
             shouldExit = true; 
             break;
+        default:
+            shouldExit = detectNondirectionalChar == true;
+            return;
     }
 
     // Clear the characters at the previous position
@@ -110,6 +120,14 @@ void Move()
 // Clears the console, displays the food and player
 void InitializeGame() 
 {
+    detectNondirectionalChar = random.Next() % 2  == 0;
+    if (detectNondirectionalChar)
+        Console.WriteLine($"Detecting nondirectional characters as escape keys...");
+
+    Thread.Sleep(1500);
+    Console.WriteLine("Starting game...");
+    Thread.Sleep(1500);
+
     Console.Clear();
     ShowFood();
     Console.SetCursorPosition(0, 0);
