@@ -35,6 +35,17 @@ while (!shouldExit)
         break;
     }
     Move(detectNondirectionalChar);
+
+    if (DetectFoodConsumed(playerX, playerY, foodX, foodY))
+    {
+        ShowFood();
+        ChangePlayer();
+    }
+}
+
+bool DetectFoodConsumed(int playerX, int playerY, int foodX, int foodY)
+{
+    return playerX == foodX && playerY == foodY;
 }
 
 // Returns true if the Terminal was resized 
@@ -74,7 +85,7 @@ void FreezePlayer()
 }
 
 // Reads directional input from the Console and moves the player
-void Move(bool detectNondirectionalChar = false) 
+void Move(bool detectNondirectionalChar = false)
 {
     int lastX = playerX;
     int lastY = playerY;
