@@ -1,11 +1,11 @@
-﻿bool exit = false;
-var rand = new Random();
-int num1 = 5;
-int num2 = 5;
+﻿/*  
+This code instantiates a value and then calls the ChangeValue method
+to update the value. The code then prints the updated value to the console.
+*/
+int x = 5;
 
-do
-{
-    num1 = rand.Next(1, 11);
-    num2 = num1 + rand.Next(1, 51);
+ChangeValue(out x);
 
-} while (exit == false);
+Console.WriteLine(x);
+
+static void ChangeValue(out int value) => value = 10;
