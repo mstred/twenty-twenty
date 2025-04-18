@@ -1,11 +1,16 @@
-﻿/*  
-This code instantiates a value and then calls the ChangeValue method
-to update the value. The code then prints the updated value to the console.
-*/
-int x = 5;
+﻿double float1 = 3000.0;
+double float2 = 0.0;
+int number1 = 3000;
+int number2 = 0;
 
-ChangeValue(out x);
+try
+{
+    Console.WriteLine(float1 / float2);
+    Console.WriteLine(number1 / number2);
+}
+catch
+{
+    Console.WriteLine("An exception has been caught");
+}
 
-Console.WriteLine(x);
-
-static void ChangeValue(out int value) => value = 10;
+Console.WriteLine("Exit program");
