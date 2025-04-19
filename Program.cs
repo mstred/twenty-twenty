@@ -1,46 +1,20 @@
-﻿try
-{
-    Process1();
-}
-catch
-{
-    Console.WriteLine("An exception has occurred");
-}
+﻿// inputValues is used to store numeric values entered by a user
+string[] inputValues = ["three", "9999999999", "0", "2"];
 
-Console.WriteLine("Exit program");
-
-static void Process1()
-{
-    WriteMessage();
-}
-
-static void WriteMessage()
-{
-    double float1 = 3000.0;
-    double float2 = 0.0;
-    int number1 = 3000;
-    int number2 = 0;
-
-    Console.WriteLine(float1 / float2);
-
+foreach (string inputValue in inputValues)
     try
     {
-        Console.WriteLine(number1 / number2);
+        int numValue = int.Parse(inputValue);
     }
-    catch (DivideByZeroException ex)
+    catch (FormatException)
     {
-        Console.WriteLine($"Exception caught in WriteMessage: {ex.Message}");
+        Console.WriteLine("Invalid readResult. Please enter a valid number.");
     }
-
-    try
+    catch (OverflowException)
     {
-        checked
-        {
-            byte smallNumber = (byte)number1;
-        }
+        Console.WriteLine("The number you entered is too large or too small.");
     }
-    catch (OverflowException ex)
+    catch(Exception ex)
     {
-        Console.WriteLine($"Exception caught in WriteMessage: {ex.Message}");
+        Console.WriteLine(ex.Message);
     }
-}
