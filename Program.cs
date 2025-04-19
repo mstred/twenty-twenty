@@ -11,14 +11,7 @@ Console.WriteLine("Exit program");
 
 static void Process1()
 {
-    try
-    {
-        WriteMessage();
-    }
-    catch (DivideByZeroException ex)
-    {
-        Console.WriteLine($"Exception caught in Process1: {ex.Message}");
-    }
+    WriteMessage();
 }
 
 static void WriteMessage()
@@ -26,13 +19,28 @@ static void WriteMessage()
     double float1 = 3000.0;
     double float2 = 0.0;
     int number1 = 3000;
-    // int number2 = 0;
+    int number2 = 0;
 
     Console.WriteLine(float1 / float2);
-    // Console.WriteLine(number1 / number2);
 
-    checked
+    try
     {
-        byte smallNumber = (byte)number1;
+        Console.WriteLine(number1 / number2);
+    }
+    catch (DivideByZeroException ex)
+    {
+        Console.WriteLine($"Exception caught in WriteMessage: {ex.Message}");
+    }
+
+    try
+    {
+        checked
+        {
+            byte smallNumber = (byte)number1;
+        }
+    }
+    catch (OverflowException ex)
+    {
+        Console.WriteLine($"Exception caught in WriteMessage: {ex.Message}");
     }
 }
