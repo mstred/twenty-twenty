@@ -15,9 +15,9 @@ static void Process1()
     {
         WriteMessage();
     }
-    catch
+    catch (DivideByZeroException ex)
     {
-        Console.WriteLine("Exception caught in Process1");
+        Console.WriteLine($"Exception caught in Process1: {ex.Message}");
     }
 }
 
