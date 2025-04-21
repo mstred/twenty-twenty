@@ -1,54 +1,54 @@
-﻿try
+﻿// Prompt the user for the lower and upper bounds
+Console.Write("Enter the lower bound: ");
+int lowerBound = int.Parse(Console.ReadLine() ?? "0");
+
+Console.Write("Enter the upper bound: ");
+int upperBound = int.Parse(Console.ReadLine() ?? "0");
+
+bool exit;
+
+do
 {
-    int num1 = int.MaxValue;
-    int num2 = int.MaxValue;
-    checked
+    try
     {
-        int result = num1 + num2;
-        Console.WriteLine("Result: " + result);
+        // Calculate the sum of the even numbers between the bounds
+        decimal averageValue = AverageOfEvenNumbers(lowerBound, upperBound);
+        // Display the value returned by AverageOfEvenNumbers in the console
+        Console.WriteLine($"The average of even numbers between {lowerBound} and {upperBound} is {averageValue}.");
+        exit = true;
     }
-}
-catch (OverflowException ex)
-{
-    Console.WriteLine("Error: The number is too large to be represented as an integer. " + ex.Message);
-}
+    catch (ArgumentOutOfRangeException ex)
+    {
+        Console.WriteLine($"An error has occurred.\n{ex.Message}\nThe upper bound must be greater than {lowerBound}");
 
-try
-{
-#pragma warning disable CS8600 // Converting null literal or possible null value to non-nullable type.
-    string str = null;
-#pragma warning restore CS8600 // Converting null literal or possible null value to non-nullable type.
-#pragma warning disable CS8602 // Dereference of a possibly null reference.
-    int length = str.Length;
-    Console.WriteLine("String Length: " + length);
-#pragma warning restore CS8602 // Dereference of a possibly null reference.
-}
-catch (NullReferenceException ex)
-{
-    Console.WriteLine("Error: The reference is null. " + ex.Message);
-}
+        Console.Write($"Enter a new upper bound (or enter Exit to quit): ");
+        string? userResponse = (Console.ReadLine() ?? "").ToLower();
+        exit = userResponse.Contains("exit");
 
-try
-{
-    int[] numbers = new int[5];
-    numbers[5] = 10;
-    Console.WriteLine("Number at index 5: " + numbers[5]);
-}
-catch (IndexOutOfRangeException ex)
-{
-    Console.WriteLine("Error: Index out of range. " + ex.Message);
-}
+        if (!exit)
+            upperBound = int.Parse(userResponse);
+    } 
+} while (!exit);
 
-try
+static decimal AverageOfEvenNumbers(int lowerBound, int upperBound)
 {
-    int num3 = 10;
-    int num4 = 0;
-    int result2 = num3 / num4;
-    Console.WriteLine("Result: " + result2);
-}
-catch (DivideByZeroException ex)
-{
-    Console.WriteLine("Error: Cannot divide by zero. " + ex.Message);
-}
+    if (lowerBound >= upperBound)
+        throw new ArgumentOutOfRangeException("upperBound", "ArgumentOutOfRangeException: upper bound must be greater than the lower bound.");
 
-Console.WriteLine("Exiting program.");
+    int sum = 0;
+    int count = 0;
+    decimal average = 0;
+
+    for (int i = lowerBound; i <= upperBound; i++)
+    {
+        if (i % 2 == 0)
+        {
+            sum += i;
+            count++;
+        }
+    }
+
+    average = (decimal)sum / count;
+
+    return average;
+}
