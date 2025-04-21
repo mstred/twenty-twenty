@@ -1,54 +1,47 @@
-﻿// Prompt the user for the lower and upper bounds
-Console.Write("Enter the lower bound: ");
-int lowerBound = int.Parse(Console.ReadLine() ?? "0");
+﻿string[][] userEnteredValues =
+[
+    ["1", "2", "3"],
+    ["1", "two", "3"],
+    ["0", "1", "2"],
+];
 
-Console.Write("Enter the upper bound: ");
-int upperBound = int.Parse(Console.ReadLine() ?? "0");
-
-bool exit;
-
-do
+try
 {
-    try
-    {
-        // Calculate the sum of the even numbers between the bounds
-        decimal averageValue = AverageOfEvenNumbers(lowerBound, upperBound);
-        // Display the value returned by AverageOfEvenNumbers in the console
-        Console.WriteLine($"The average of even numbers between {lowerBound} and {upperBound} is {averageValue}.");
-        exit = true;
-    }
-    catch (ArgumentOutOfRangeException ex)
-    {
-        Console.WriteLine($"An error has occurred.\n{ex.Message}\nThe upper bound must be greater than {lowerBound}");
-
-        Console.Write($"Enter a new upper bound (or enter Exit to quit): ");
-        string? userResponse = (Console.ReadLine() ?? "").ToLower();
-        exit = userResponse.Contains("exit");
-
-        if (!exit)
-            upperBound = int.Parse(userResponse);
-    } 
-} while (!exit);
-
-static decimal AverageOfEvenNumbers(int lowerBound, int upperBound)
+    Workflow1(userEnteredValues);
+    Console.WriteLine("'Workflow1' completed successfully.");
+}
+catch (DivideByZeroException ex)
 {
-    if (lowerBound >= upperBound)
-        throw new ArgumentOutOfRangeException("upperBound", "ArgumentOutOfRangeException: upper bound must be greater than the lower bound.");
+    Console.WriteLine($"An error occurred during 'Workflow1'.\n{ex.Message}");
+}
 
-    int sum = 0;
-    int count = 0;
-    decimal average = 0;
-
-    for (int i = lowerBound; i <= upperBound; i++)
-    {
-        if (i % 2 == 0)
+static void Workflow1(string[][] userEnteredValues)
+{
+    foreach (string[] userEntries in userEnteredValues)
+        try
         {
-            sum += i;
-            count++;
+            Process1(userEntries);
+            Console.WriteLine("'Process1' completed successfully.\n");
+        }
+        catch (FormatException ex)
+        {
+            Console.WriteLine($"'Process1' encountered an issue, process aborted.\n{ex.Message}\n");
+        }
+}
+
+static void Process1(string[] userEntries)
+{
+    foreach (string userValue in userEntries)
+    {
+        if (!int.TryParse(userValue, out int valueEntered))
+            throw new FormatException("Invalid data. User input values must be valid integers.");
+
+        if (valueEntered == 0)
+            throw new DivideByZeroException("Invalid data. User input values must be non-zero values.");
+
+        checked
+        {
+            int calculatedValue = 4 / valueEntered;
         }
     }
-
-    average = (decimal)sum / count;
-
-    return average;
 }
