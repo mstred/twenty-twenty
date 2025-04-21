@@ -17,24 +17,21 @@ is used to ensure that logic in the MakeChange method is working as
 expected.
 */
 
-
-string? readResult = null;
 bool useTestData = false;
 
 Console.Clear();
 
-int[] cashTill = new int[] { 0, 0, 0, 0 };
-int registerCheckTillTotal = 0;
+int[] cashTill = [0, 0, 0, 0];
 
 // registerDailyStartingCash: $1 x 50, $5 x 20, $10 x 10, $20 x 5 => ($350 total)
 int[,] registerDailyStartingCash = new int[,] { { 1, 50 }, { 5, 20 }, { 10, 10 }, { 20, 5 } };
 
-int[] testData = new int[] { 6, 10, 17, 20, 31, 36, 40, 41 };
+int[] testData = [6, 10, 17, 20, 31, 36, 40, 41];
 int testCounter = 0;
 
 LoadTillEachMorning(registerDailyStartingCash, cashTill);
 
-registerCheckTillTotal = registerDailyStartingCash[0, 0] * registerDailyStartingCash[0, 1] + registerDailyStartingCash[1, 0] * registerDailyStartingCash[1, 1] + registerDailyStartingCash[2, 0] * registerDailyStartingCash[2, 1] + registerDailyStartingCash[3, 0] * registerDailyStartingCash[3, 1];
+int registerCheckTillTotal = registerDailyStartingCash[0, 0] * registerDailyStartingCash[0, 1] + registerDailyStartingCash[1, 0] * registerDailyStartingCash[1, 1] + registerDailyStartingCash[2, 0] * registerDailyStartingCash[2, 1] + registerDailyStartingCash[3, 0] * registerDailyStartingCash[3, 1];
 
 // display the number of bills of each denomination currently in the till
 LogTillStatus(cashTill);
@@ -96,12 +93,10 @@ while (transactions > 0)
     Console.WriteLine();
 }
 
-Console.WriteLine("Press the Enter key to exit");
 do
 {
-    readResult = Console.ReadLine();
-
-} while (readResult == null);
+    Console.WriteLine("Press the Enter key to exit");
+} while (Console.ReadLine() == null);
 
 
 static void LoadTillEachMorning(int[,] registerDailyStartingCash, int[] cashTill)
@@ -172,7 +167,4 @@ static void LogTillStatus(int[] cashTill)
 }
 
 static string TillAmountSummary(int[] cashTill)
-{
-    return $"The till has {cashTill[3] * 20 + cashTill[2] * 10 + cashTill[1] * 5 + cashTill[0]} dollars";
-
-}
+    => $"The till has {cashTill[3] * 20 + cashTill[2] * 10 + cashTill[1] * 5 + cashTill[0]} dollars";
